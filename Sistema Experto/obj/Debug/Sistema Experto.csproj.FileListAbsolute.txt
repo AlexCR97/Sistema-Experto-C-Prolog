@@ -1,0 +1,19 @@
+C:\Users\carp_\source\repos\Sistema Experto\Sistema Experto\bin\Debug\Sistema Experto.exe.config
+C:\Users\carp_\source\repos\Sistema Experto\Sistema Experto\bin\Debug\Sistema Experto.exe
+C:\Users\carp_\source\repos\Sistema Experto\Sistema Experto\bin\Debug\Sistema Experto.pdb
+C:\Users\carp_\source\repos\Sistema Experto\Sistema Experto\obj\Debug\Sistema Experto.csprojAssemblyReference.cache
+C:\Users\carp_\source\repos\Sistema Experto\Sistema Experto\obj\Debug\App.g.cs
+C:\Users\carp_\source\repos\Sistema Experto\Sistema Experto\obj\Debug\Sistema Experto_MarkupCompile.cache
+C:\Users\carp_\source\repos\Sistema Experto\Sistema Experto\obj\Debug\Sistema Experto_MarkupCompile.lref
+C:\Users\carp_\source\repos\Sistema Experto\Sistema Experto\obj\Debug\Sistema Experto.g.resources
+C:\Users\carp_\source\repos\Sistema Experto\Sistema Experto\obj\Debug\Sistema Experto.csproj.GenerateResource.cache
+C:\Users\carp_\source\repos\Sistema Experto\Sistema Experto\obj\Debug\Sistema Experto.exe
+C:\Users\carp_\source\repos\Sistema Experto\Sistema Experto\obj\Debug\Sistema Experto.pdb
+C:\Users\carp_\source\repos\Sistema Experto\Sistema Experto\bin\Debug\SwiPlCs.dll
+C:\Users\carp_\source\repos\Sistema Experto\Sistema Experto\bin\Debug\SwiPlCs.xml
+C:\Users\carp_\source\repos\Sistema Experto\Sistema Experto\obj\Debug\Sistema Experto.csproj.CopyComplete
+C:\Users\carp_\source\repos\Sistema Experto\Sistema Experto\obj\Debug\SistemaExperto.Properties.Resources.resources
+C:\Users\carp_\source\repos\Sistema Experto\Sistema Experto\obj\Debug\Gui\Controles\FrameworkControl.g.cs
+C:\Users\carp_\source\repos\Sistema Experto\Sistema Experto\obj\Debug\Gui\Ventanas\MainWindow.g.cs
+C:\Users\carp_\source\repos\Sistema Experto\Sistema Experto\obj\Debug\Gui\Controles\FrameworkControl.baml
+C:\Users\carp_\source\repos\Sistema Experto\Sistema Experto\obj\Debug\Gui\Ventanas\MainWindow.baml

@@ -1,0 +1,240 @@
+﻿<Window x:Class="SistemaExperto.Gui.Ventanas.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SistemaExperto.Gui.Ventanas"
+        mc:Ignorable="d"
+        Background="LightGray"
+        ResizeMode="NoResize"
+        Title="MainWindow" Height="650" Width="950"
+        WindowStartupLocation="CenterScreen">
+    <Border Padding="20">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="275"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <!--Left (Filters)-->
+            <StackPanel Orientation="Vertical">
+
+                <!--Plataforma-->
+                <TextBlock Text="Plataforma"/>
+                <ComboBox x:Name="cbPlataformas" Margin="0 4 0 10"/>
+
+                <!--SO-->
+                <TextBlock Text="Sistema Operativo"/>
+                <ComboBox x:Name="cbSistemasOperativos" Margin="0 4 0 10"/>
+
+                <!--Lenguaje-->
+                <TextBlock Text="Lenguaje de programación"/>
+                <ComboBox x:Name="cbLenguajes" Margin="0 4 0 10"/>
+
+                <!--Tipado-->
+                <TextBlock Text="Tipado"/>
+                <Grid Margin="0 4 0 10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <ComboBox x:Name="cbTipados1" Grid.Column="0" Margin="0 0 5 0"/>
+                    <ComboBox x:Name="cbTipados2" Grid.Column="1" Margin="5 0 0 0"/>
+                </Grid>
+                
+                <!--Paradigma-->
+                <TextBlock Text="Paradigma"/>
+                <ComboBox x:Name="cbParadigmas" Margin="0 4 0 10"/>
+
+                <!--Lado-->
+                <TextBlock Text="Lado de desarrollo"/>
+                <ComboBox x:Name="cbLadosDesarrollo" Margin="0 4 0 10"/>
+
+                <!--IDE-->
+                <TextBlock Text="Entorno de Desarrollo Integrado (IDE)"/>
+                <ComboBox x:Name="cbIdes" Margin="0 4 0 10"/>
+
+                <!--Hardware-->
+                <CheckBox x:Name="cbRequisitosHardware" Content="Requisitos de Hardware" Margin="0 4 0 10"/>
+
+                <TextBlock Text="RAM" Margin="0 4 0 10"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <!--RAM min-->
+                    <StackPanel Grid.Column="0" Grid.Row="0" Margin="0 0 5 0">
+                        <TextBlock Text="Mínimo"/>
+                        <TextBox x:Name="tbRamMin" Margin="0 4 0 10"/>
+                    </StackPanel>
+
+                    <!--RAM max-->
+                    <StackPanel Grid.Column="1" Grid.Row="0" Margin="5 0 0 0">
+                        <TextBlock Text="Máximo"/>
+                        <TextBox x:Name="tbRamMax" Margin="0 4 0 10"/>
+                    </StackPanel>
+
+                    <!--Espacio-->
+                    <StackPanel Grid.Column="0" Grid.Row="1" Margin="0 0 5 0">
+                        <TextBlock Text="Espacio en disco"/>
+                        <TextBox x:Name="tbEspacioDisco" Margin="0 4 0 0"/>
+                    </StackPanel>
+
+                    <!--CPU-->
+                    <StackPanel Grid.Column="1" Grid.Row="1" Margin="5 0 0 0">
+                        <TextBlock Text="Procesador (CPU)"/>
+                        <ComboBox x:Name="cbCpu" Margin="0 4 0 0"/>
+                    </StackPanel>
+                </Grid>
+
+                <!--Aplicar-->
+                <Button x:Name="bAplicar" Content="Aplicar" Margin="0 30 0 0" Padding="3"/>
+            </StackPanel>
+            
+            <!--Right (Framework panel) -->
+            <Border x:Name="bDetallesFramework" Grid.Column="1" Background="White" Margin="20 0 0 0">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!--Top (Framework details)-->
+                    <ScrollViewer  Grid.Row="0">
+                        <StackPanel Orientation="Vertical">
+                            
+                            <!--Nombre del framework-->
+                            <TextBlock x:Name="tbNombreFramework" Text="Nombre del framework" FontSize="18" TextAlignment="Center" Margin="0 0 0 10"/>
+
+                            <!--Imagen del framework-->
+                            <Border Height="200" Background="Aqua" Margin="0 0 0 10"/>
+                            
+                            <!--Descripcion del framework-->
+                            <TextBlock x:Name="tbDescFramework" Text="Descripcion del framework" FontSize="15" Margin="0 0 0 10"/>
+                            
+                            <!--Ventajas-->
+                            <TextBlock Text="Ventajas" FontSize="15" Margin="0 0 0 10"/>
+                            <ListView x:Name="lvVentajas" Margin="20 0 20 10" Background="Transparent" BorderThickness="0">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <BulletDecorator>
+                                            <BulletDecorator.Bullet>
+                                                <Ellipse Height="6" Width="6" Fill="Black"/>
+                                            </BulletDecorator.Bullet>
+                                            <TextBlock Text="{Binding}" Margin="10 0 0 0"/>
+                                        </BulletDecorator>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+
+                            <!--Desventajas-->
+                            <TextBlock Text="Desventajas" FontSize="15" Margin="0 0 0 10"/>
+                            <ListView x:Name="lvDesventajas" Margin="20 0 20 10" Background="Transparent" BorderThickness="0">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <BulletDecorator>
+                                            <BulletDecorator.Bullet>
+                                                <Ellipse Height="6" Width="6" Fill="Black"/>
+                                            </BulletDecorator.Bullet>
+                                            <TextBlock Text="{Binding}" Margin="10 0 0 0"/>
+                                        </BulletDecorator>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+
+                            <!--Detalles del framework-->
+                            <TextBlock Text="Detalles" TextAlignment="Center" FontSize="15" Margin="0 0 0 10"/>
+                            <Grid Margin="50 0 50 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                
+                                <!--Plataforma-->
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="Plataforma" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0 0 0 10"/>
+                                <TextBlock Grid.Column="1" Grid.Row="0" Text="Plataforma" FontSize="15" TextAlignment="Center" Margin="0 0 0 10"/>
+
+                                <!--Sistema operativo-->
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="Sistema Operativo" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0 0 0 10"/>
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="Sistema Operativo" FontSize="15" TextAlignment="Center" Margin="0 0 0 10"/>
+
+                                <!--Lenguaje de Programacion-->
+                                <TextBlock Grid.Column="0" Grid.Row="2" Text="Lenguaje de programacion" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0 0 0 10"/>
+                                <TextBlock Grid.Column="1" Grid.Row="2" Text="Lenguaje de programacion" FontSize="15" TextAlignment="Center" Margin="0 0 0 10"/>
+
+                                <!--Tipado 1-->
+                                <TextBlock Grid.Column="0" Grid.Row="3" Text="Tipado 1" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0 0 0 10"/>
+                                <TextBlock Grid.Column="1" Grid.Row="3" Text="Tipado 1" FontSize="15" TextAlignment="Center" Margin="0 0 0 10"/>
+
+                                <!--Tipado 2-->
+                                <TextBlock Grid.Column="0" Grid.Row="4" Text="Tipado 2" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0 0 0 10"/>
+                                <TextBlock Grid.Column="1" Grid.Row="4" Text="Tipado 2" FontSize="15" TextAlignment="Center" Margin="0 0 0 10"/>
+
+                                <!--Lado de desarrollo-->
+                                <TextBlock Grid.Column="0" Grid.Row="5" Text="Lado de desarrollo" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0 0 0 10"/>
+                                <TextBlock Grid.Column="1" Grid.Row="5" Text="Tipado Lado de desarrollo" FontSize="15" TextAlignment="Center" Margin="0 0 0 10"/>
+
+                                <!--IDE-->
+                                <TextBlock Grid.Column="0" Grid.Row="6" Text="IDE" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0 0 0 10"/>
+                                <TextBlock Grid.Column="1" Grid.Row="6" Text="IDE" FontSize="15" TextAlignment="Center" Margin="0 0 0 10"/>
+                            </Grid>
+
+                            <!--Requisitos de Hardware-->
+                            <TextBlock Text="Requisitos de Hardware" TextAlignment="Center" FontSize="15" Margin="0 0 0 10"/>
+                            <Grid Margin="50 0 50 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <!--RAM-->
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="RAM" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0 0 0 10"/>
+                                <TextBlock Grid.Column="1" Grid.Row="0" Text="RAM" FontSize="15" TextAlignment="Center" Margin="0 0 0 10"/>
+
+                                <!--Espacio en disco-->
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="Espacio en disco" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0 0 0 10"/>
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="Espacio en disco" FontSize="15" TextAlignment="Center" Margin="0 0 0 10"/>
+
+                                <!--Procesador-->
+                                <TextBlock Grid.Column="0" Grid.Row="2" Text="CPU" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0 0 0 10"/>
+                                <TextBlock Grid.Column="1" Grid.Row="2" Text="CPU" FontSize="15" TextAlignment="Center" Margin="0 0 0 10"/>
+                            </Grid>
+                        </StackPanel>
+                    </ScrollViewer>
+                    
+                    <!--Bottom (Buttons)-->
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
+                        <Button x:Name="bAnterior" Content="Anterior" Padding="20 0 20 0"/>
+                        <TextBlock Text="1/20" Margin="10 0 10 0" VerticalAlignment="Center"/>
+                        <Button x:Name="bSiguiente" Content="Siguiente" Padding="20 0 20 0"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</Window>
