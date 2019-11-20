@@ -67,6 +67,7 @@
     <Compile Include="Datos\EntornoDesarrolloIntegrado.cs" />
     <Compile Include="Datos\EnumList.cs" />
     <Compile Include="Datos\Framework.cs" />
+    <Compile Include="Datos\Frameworks.cs" />
     <Compile Include="Datos\LadoDesarrollo.cs" />
     <Compile Include="Datos\LenguajeProgramacion.cs" />
     <Compile Include="Datos\NombreLenguajeProgramacion.cs" />
@@ -78,9 +79,6 @@
     <Compile Include="Datos\StringEnum.cs" />
     <Compile Include="Datos\Tipado1.cs" />
     <Compile Include="Datos\Tipado2.cs" />
-    <Compile Include="Gui\Controles\FrameworkControl.xaml.cs">
-      <DependentUpon>FrameworkControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Gui\Ventanas\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -112,10 +110,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Gui\Controles\FrameworkControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Gui\Ventanas\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

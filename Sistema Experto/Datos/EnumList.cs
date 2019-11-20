@@ -8,6 +8,15 @@ namespace SistemaExperto.Datos
 {
     public static class EnumList
     {
+        public static StringEnum ValorDe(string id, List<StringEnum> values)
+        {
+            foreach (StringEnum stringEnum in values)
+                if (stringEnum.ToString() == id)
+                    return stringEnum;
+
+            return null;
+        }
+
         #region ides
         private static List<EntornoDesarrolloIntegrado> ides;
         public static List<EntornoDesarrolloIntegrado> IDEs

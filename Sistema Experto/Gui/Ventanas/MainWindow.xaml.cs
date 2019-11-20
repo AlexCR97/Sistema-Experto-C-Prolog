@@ -18,14 +18,14 @@ namespace SistemaExperto.Gui.Ventanas
 {
     public partial class MainWindow : Window
     {
-        private List<Framework> Frameworks = new List<Framework>();
+        private List<Frameworks> frameworks = new List<Frameworks>();
         private int frameworkIndex = 0;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            //IniciarProlog();
+            IniciarProlog();
             CambiarEstadoRequisitosHardware();
             LlenarDatos();
             SetEvents();
@@ -33,7 +33,7 @@ namespace SistemaExperto.Gui.Ventanas
 
         private void IniciarProlog()
         {
-            if (!PrologEngine.Start(@"files\amigos.pl"))
+            if (!PrologEngine.Start(@"files\frameworks.pl"))
             {
                 MessageBox.Show("Error");
                 return;
@@ -129,27 +129,36 @@ namespace SistemaExperto.Gui.Ventanas
 
         private void CambiarFramework(int direccion)
         {
-            if (Frameworks.Count == 0)
+            if (frameworks.Count == 0)
                 return;
 
             frameworkIndex += direccion;
 
             // wrap index in framework list size
 
-            if (frameworkIndex >= Frameworks.Count)
+            if (frameworkIndex >= frameworks.Count)
                 frameworkIndex = 0;
 
             else if (frameworkIndex <= 0)
-                frameworkIndex = Frameworks.Count - 1;
+                frameworkIndex = frameworks.Count - 1;
 
-            Framework framework = Frameworks[frameworkIndex];
+            Frameworks framework = frameworks[frameworkIndex];
 
-            // update ui
+            // actualizar la ui
 
             tbNombreFramework.Text = framework.Nombre;
             tbDescFramework.Text = framework.Descripcion;
             lvVentajas.ItemsSource = framework.Ventajas;
             lvDesventajas.ItemsSource = framework.Desventajas;
+            tbPlataforma.Text = framework.Plataforma;
+            tbSistemaOperativo.Text = framework.SistemaOperativo;
+            tbLenguaje.Text = String.Join(", ", framework.Lenguajes);
+            tbTipado1.Text = framework.Tipado1;
+            tbTipado2.Text = String.Join(", ", framework.Tipaado2);
+            tbLadoDesarrollo.Text = framework.LadoDesarrollo;
+            tbIde.Text = String.Join(", ", framework.Ides);
+
+            tbContador.Text = $"{frameworkIndex + 1}/{frameworks.Count}";
         }
 
         private void CambiarVisibilidadDetallesFramework()
@@ -159,7 +168,112 @@ namespace SistemaExperto.Gui.Ventanas
 
         private void AplicarFiltros()
         {
+            // obtener filtros
 
+            string plataforma = cbPlataformas.SelectedItem.ToString();
+            string sistemaOperativo = cbSistemasOperativos.SelectedItem.ToString();
+            string lenguaje = cbLenguajes.SelectedItem.ToString();
+            string tipado1 = cbTipados1.SelectedItem.ToString();
+            string tipado2 = cbTipados2.SelectedItem.ToString();
+            string paradigma = cbParadigmas.SelectedItem.ToString();
+            string ladoDesarrollo = cbLadosDesarrollo.SelectedItem.ToString();
+            string ide = cbIdes.SelectedItem.ToString();
+            string ram = tbRam.Text;
+            string espacio = tbEspacio.Text;
+            string cpu = tbCpu.Text;
+
+            // normalizar filtros (para que puedan usarse en prolog)
+
+            /*plataforma = NormalizarFiltro(plataforma);
+            sistemaOperativo = NormalizarFiltro(sistemaOperativo);
+            lenguaje = NormalizarFiltro(lenguaje);
+            tipado1 = NormalizarFiltro(tipado1);
+            tipado2 = NormalizarFiltro(tipado2);
+            paradigma = NormalizarFiltro(paradigma);
+            ladoDesarrollo = NormalizarFiltro(ladoDesarrollo);
+            ide = NormalizarFiltro(ide);
+            ram = NormalizarFiltro(ram);
+            espacio = NormalizarFiltro(espacio);
+            cpu = NormalizarFiltro(cpu);*/
+
+            // construir consulta para obtener los nombres de los frameworks
+
+            var queries = new List<string>()
+            {
+                $"plataforma(X, {plataforma})",
+                $"sistema_operativo(X, {sistemaOperativo})",
+                $"lenguaje(X, {lenguaje})",
+                $"tipado1(X, {tipado1})",
+                $"tipado2(X, {tipado2})",
+                $"paradigma(X, {paradigma})",
+                $"lado_desarrollo(X, {ladoDesarrollo})",
+                $"ide(X, {ide})",
+            };
+
+            string query = new StringBuilder().Append(String.Join(" , ", queries)).Append('.').ToString();
+
+            // procesar la consulta para obtener los nombres de los frameworks
+
+            frameworks.Clear();
+            var nombresFrameworks = new List<string>();
+
+            QueryProcessor.ProcessForResults(query).ForEach(result =>
+            {
+                foreach (var i in result)
+                {
+                    nombresFrameworks.Add(i.Value);
+                }
+            });
+
+            // procesar consultas para obtener los detalles de los frameworks
+
+            nombresFrameworks.ForEach(nombre =>
+            {
+                frameworks.Add(new Frameworks()
+                {
+                    Nombre = DenormalizarFiltro(nombre),
+                    Descripcion = QueryProcessor.ProcessForString($"descripcion({nombre}, X)"),
+                    Ventajas = QueryProcessor.ProcessForList($"ventajas({nombre}, X)"),
+                    Desventajas = QueryProcessor.ProcessForList($"desventajas({nombre}, X)"),
+                    Plataforma = QueryProcessor.ProcessForString($"plataforma({nombre}, X)"),
+                    SistemaOperativo = QueryProcessor.ProcessForString($"sistema_operativo({nombre}, X)"),
+                    Lenguajes = QueryProcessor.ProcessForList($"lenguaje({nombre}, X)"),
+                    Tipado1 = QueryProcessor.ProcessForString($"tipado1({nombre}, X)"),
+                    Tipaado2 = QueryProcessor.ProcessForList($"tipado2({nombre}, X)"),
+                    Paradigmas = QueryProcessor.ProcessForList($"paradigma({nombre}, X)"),
+                    LadoDesarrollo = QueryProcessor.ProcessForString($"lado_desarrollo({nombre}, X)"),
+                    Ides = QueryProcessor.ProcessForList($"ide({nombre}, X)"),
+                });
+            });
+
+            // mostrar los frameworks encontrados
+            frameworkIndex = 0;
+            CambiarFramework(0);
+        }
+
+        private string NormalizarFiltro(string filtro)
+        {
+            return filtro.ToLower().Replace(' ', '_');
+        }
+
+        private string DenormalizarFiltro(string filtro)
+        {
+            string[] words = filtro.Split('_');
+
+            for (int i = 0; i < words.Length; i++)
+            {
+                string currentWord = words[i];
+
+                // hola -> Hola
+                currentWord = new StringBuilder()
+                    .Append(currentWord[0].ToString().ToUpper())
+                    .Append(currentWord.Substring(1))
+                    .ToString();
+
+                words[i] = currentWord;
+            }
+
+            return String.Join(" ", words);
         }
     }
 }

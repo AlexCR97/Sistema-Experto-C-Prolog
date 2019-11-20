@@ -13,7 +13,5 @@ C:\Users\carp_\source\repos\Sistema Experto\Sistema Experto\bin\Debug\SwiPlCs.dl
 C:\Users\carp_\source\repos\Sistema Experto\Sistema Experto\bin\Debug\SwiPlCs.xml
 C:\Users\carp_\source\repos\Sistema Experto\Sistema Experto\obj\Debug\Sistema Experto.csproj.CopyComplete
 C:\Users\carp_\source\repos\Sistema Experto\Sistema Experto\obj\Debug\SistemaExperto.Properties.Resources.resources
-C:\Users\carp_\source\repos\Sistema Experto\Sistema Experto\obj\Debug\Gui\Controles\FrameworkControl.g.cs
 C:\Users\carp_\source\repos\Sistema Experto\Sistema Experto\obj\Debug\Gui\Ventanas\MainWindow.g.cs
-C:\Users\carp_\source\repos\Sistema Experto\Sistema Experto\obj\Debug\Gui\Controles\FrameworkControl.baml
 C:\Users\carp_\source\repos\Sistema Experto\Sistema Experto\obj\Debug\Gui\Ventanas\MainWindow.baml

@@ -171,31 +171,31 @@
                                 
                                 <!--Plataforma-->
                                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Plataforma" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0 0 0 10"/>
-                                <TextBlock Grid.Column="1" Grid.Row="0" Text="Plataforma" FontSize="15" TextAlignment="Center" Margin="0 0 0 10"/>
+                                <TextBlock x:Name="tbPlataforma" Grid.Column="1" Grid.Row="0" Text="Plataforma" FontSize="15" TextAlignment="Center" Margin="0 0 0 10"/>
 
                                 <!--Sistema operativo-->
                                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Sistema Operativo" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0 0 0 10"/>
-                                <TextBlock Grid.Column="1" Grid.Row="1" Text="Sistema Operativo" FontSize="15" TextAlignment="Center" Margin="0 0 0 10"/>
+                                <TextBlock x:Name="tbSistemaOperativo" Grid.Column="1" Grid.Row="1" Text="Sistema Operativo" FontSize="15" TextAlignment="Center" Margin="0 0 0 10"/>
 
                                 <!--Lenguaje de Programacion-->
                                 <TextBlock Grid.Column="0" Grid.Row="2" Text="Lenguaje de programacion" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0 0 0 10"/>
-                                <TextBlock Grid.Column="1" Grid.Row="2" Text="Lenguaje de programacion" FontSize="15" TextAlignment="Center" Margin="0 0 0 10"/>
+                                <TextBlock x:Name="tbLenguaje" Grid.Column="1" Grid.Row="2" Text="Lenguaje de programacion" FontSize="15" TextAlignment="Center" Margin="0 0 0 10"/>
 
                                 <!--Tipado 1-->
                                 <TextBlock Grid.Column="0" Grid.Row="3" Text="Tipado 1" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0 0 0 10"/>
-                                <TextBlock Grid.Column="1" Grid.Row="3" Text="Tipado 1" FontSize="15" TextAlignment="Center" Margin="0 0 0 10"/>
+                                <TextBlock x:Name="tbTipado1" Grid.Column="1" Grid.Row="3" Text="Tipado 1" FontSize="15" TextAlignment="Center" Margin="0 0 0 10"/>
 
                                 <!--Tipado 2-->
                                 <TextBlock Grid.Column="0" Grid.Row="4" Text="Tipado 2" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0 0 0 10"/>
-                                <TextBlock Grid.Column="1" Grid.Row="4" Text="Tipado 2" FontSize="15" TextAlignment="Center" Margin="0 0 0 10"/>
+                                <TextBlock x:Name="tbTipado2" Grid.Column="1" Grid.Row="4" Text="Tipado 2" FontSize="15" TextAlignment="Center" Margin="0 0 0 10"/>
 
                                 <!--Lado de desarrollo-->
                                 <TextBlock Grid.Column="0" Grid.Row="5" Text="Lado de desarrollo" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0 0 0 10"/>
-                                <TextBlock Grid.Column="1" Grid.Row="5" Text="Tipado Lado de desarrollo" FontSize="15" TextAlignment="Center" Margin="0 0 0 10"/>
+                                <TextBlock x:Name="tbLadoDesarrollo" Grid.Column="1" Grid.Row="5" Text="Tipado Lado de desarrollo" FontSize="15" TextAlignment="Center" Margin="0 0 0 10"/>
 
                                 <!--IDE-->
                                 <TextBlock Grid.Column="0" Grid.Row="6" Text="IDE" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0 0 0 10"/>
-                                <TextBlock Grid.Column="1" Grid.Row="6" Text="IDE" FontSize="15" TextAlignment="Center" Margin="0 0 0 10"/>
+                                <TextBlock x:Name="tbIde" Grid.Column="1" Grid.Row="6" Text="IDE" FontSize="15" TextAlignment="Center" Margin="0 0 0 10"/>
                             </Grid>
 
                             <!--Requisitos de Hardware-->
@@ -214,15 +214,15 @@
 
                                 <!--RAM-->
                                 <TextBlock Grid.Column="0" Grid.Row="0" Text="RAM" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0 0 0 10"/>
-                                <TextBlock Grid.Column="1" Grid.Row="0" Text="RAM" FontSize="15" TextAlignment="Center" Margin="0 0 0 10"/>
+                                <TextBlock x:Name="tbRam" Grid.Column="1" Grid.Row="0" Text="RAM" FontSize="15" TextAlignment="Center" Margin="0 0 0 10"/>
 
                                 <!--Espacio en disco-->
                                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Espacio en disco" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0 0 0 10"/>
-                                <TextBlock Grid.Column="1" Grid.Row="1" Text="Espacio en disco" FontSize="15" TextAlignment="Center" Margin="0 0 0 10"/>
+                                <TextBlock x:Name="tbEspacio" Grid.Column="1" Grid.Row="1" Text="Espacio en disco" FontSize="15" TextAlignment="Center" Margin="0 0 0 10"/>
 
                                 <!--Procesador-->
                                 <TextBlock Grid.Column="0" Grid.Row="2" Text="CPU" FontSize="15" FontWeight="Bold" TextAlignment="Center" Margin="0 0 0 10"/>
-                                <TextBlock Grid.Column="1" Grid.Row="2" Text="CPU" FontSize="15" TextAlignment="Center" Margin="0 0 0 10"/>
+                                <TextBlock x:Name="tbCpu" Grid.Column="1" Grid.Row="2" Text="CPU" FontSize="15" TextAlignment="Center" Margin="0 0 0 10"/>
                             </Grid>
                         </StackPanel>
                     </ScrollViewer>
@@ -230,7 +230,7 @@
                     <!--Bottom (Buttons)-->
                     <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
                         <Button x:Name="bAnterior" Content="Anterior" Padding="20 0 20 0"/>
-                        <TextBlock Text="1/20" Margin="10 0 10 0" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="tbContador" Text="1/20" Margin="10 0 10 0" VerticalAlignment="Center"/>
                         <Button x:Name="bSiguiente" Content="Siguiente" Padding="20 0 20 0"/>
                     </StackPanel>
                 </Grid>

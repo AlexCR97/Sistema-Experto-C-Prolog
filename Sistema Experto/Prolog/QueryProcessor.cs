@@ -16,6 +16,22 @@ namespace SistemaExperto.Prolog
             return plQuery.NextSolution();
         }
 
+        public static List<string> ProcessForList(string query)
+        {
+            var list = new List<string>();
+            var plQuery = new PlQuery(query);
+
+            while (plQuery.NextSolution())
+            {
+                foreach (string id in plQuery.VariableNames)
+                {
+                    list.Add(plQuery.Variables[id].ToString());
+                }
+            }
+
+            return list;
+        }
+
         public static List<Dictionary<string, string>> ProcessForResults(string query)
         {
             var results = new List<Dictionary<string, string>>();
@@ -34,6 +50,16 @@ namespace SistemaExperto.Prolog
             }
 
             return results;
+        }
+
+        public static string ProcessForString(string query)
+        {
+            List<string> list = ProcessForList(query);
+
+            if (list.Count == 0)
+                return "";
+
+            return list[0];
         }
     }
 }
