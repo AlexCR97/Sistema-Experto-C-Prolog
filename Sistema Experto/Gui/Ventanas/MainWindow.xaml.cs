@@ -33,7 +33,7 @@ namespace SistemaExperto.Gui.Ventanas
 
         private void IniciarProlog()
         {
-            if (!PrologEngine.Start(@"files\frameworks.pl"))
+            if (!PrologEngine.Start(@"files\frameworks copy.pl"))
             {
                 MessageBox.Show("Error");
                 return;
@@ -42,44 +42,28 @@ namespace SistemaExperto.Gui.Ventanas
 
         private void LlenarDatos()
         {
-            var plataformas = new List<string>() { "Todos" };
-            EnumList.Plataformas.ForEach(i => plataformas.Add(i.ToString()));
-            cbPlataformas.ItemsSource = plataformas;
+            cbPlataformas.ItemsSource = NormalizarLista(QueryProcessor.ProcessForUniqueList("plataforma(_, X)"));
             cbPlataformas.SelectedIndex = 0;
 
-            var sistemasOperativos = new List<string>() { "Todos" };
-            EnumList.SistemasOperativos.ForEach(i => sistemasOperativos.Add(i.ToString()));
-            cbSistemasOperativos.ItemsSource = sistemasOperativos;
+            cbSistemasOperativos.ItemsSource = NormalizarLista(QueryProcessor.ProcessForUniqueList("sistema_operativo(_, X)"));
             cbSistemasOperativos.SelectedIndex = 0;
 
-            var lenguajes = new List<string>() { "Todos" };
-            EnumList.LenguajeProgramacion.ForEach(i => lenguajes.Add(i.ToString()));
-            cbLenguajes.ItemsSource = lenguajes;
+            cbLenguajes.ItemsSource = NormalizarLista(QueryProcessor.ProcessForUniqueList("lenguaje(_, X)"));
             cbLenguajes.SelectedIndex = 0;
 
-            var tipados1 = new List<string>() { "Todos" };
-            EnumList.Tipados1.ForEach(i => tipados1.Add(i.ToString()));
-            cbTipados1.ItemsSource = tipados1;
+            cbTipados1.ItemsSource = NormalizarLista(QueryProcessor.ProcessForUniqueList("tipado1(_, X)"));
             cbTipados1.SelectedIndex = 0;
 
-            var tipados2 = new List<string>() { "Todos" };
-            EnumList.Tipados2.ForEach(i => tipados2.Add(i.ToString()));
-            cbTipados2.ItemsSource = tipados2;
+            cbTipados2.ItemsSource = NormalizarLista(QueryProcessor.ProcessForUniqueList("tipado2(_, X)"));
             cbTipados2.SelectedIndex = 0;
 
-            var paradigmas = new List<string>() { "Todos" };
-            EnumList.Paradigmas.ForEach(i => paradigmas.Add(i.ToString()));
-            cbParadigmas.ItemsSource = paradigmas;
+            cbParadigmas.ItemsSource = NormalizarLista(QueryProcessor.ProcessForUniqueList("paradigma(_, X)"));
             cbParadigmas.SelectedIndex = 0;
 
-            var ladosDesarrollo = new List<string>() { "Todos" };
-            EnumList.LadoDesarrollo.ForEach(i => ladosDesarrollo.Add(i.ToString()));
-            cbLadosDesarrollo.ItemsSource = ladosDesarrollo;
+            cbLadosDesarrollo.ItemsSource = NormalizarLista(QueryProcessor.ProcessForUniqueList("lado_desarrollo(_, X)")); ;
             cbLadosDesarrollo.SelectedIndex = 0;
 
-            var ides = new List<string>() { "Todos" };
-            EnumList.IDEs.ForEach(i => ides.Add(i.ToString()));
-            cbIdes.ItemsSource = ides;
+            cbIdes.ItemsSource = NormalizarLista(QueryProcessor.ProcessForUniqueList("ide(_, X)"));
             cbIdes.SelectedIndex = 0;
 
             var cpus = new List<string>() { "Todos" };
@@ -90,6 +74,7 @@ namespace SistemaExperto.Gui.Ventanas
 
         private void SetEvents()
         {
+            // habilitar e inhabilitar algunos filtros dependiendo del tipo de plataforma seleccionada
             cbPlataformas.SelectionChanged += (s, e) =>
             {
                 string selected = cbPlataformas.SelectedItem.ToString();
@@ -130,7 +115,10 @@ namespace SistemaExperto.Gui.Ventanas
         private void CambiarFramework(int direccion)
         {
             if (frameworks.Count == 0)
+            {
+                tbContador.Text = $"{frameworkIndex + 1}/{frameworks.Count}";
                 return;
+            }
 
             frameworkIndex += direccion;
 
@@ -139,26 +127,30 @@ namespace SistemaExperto.Gui.Ventanas
             if (frameworkIndex >= frameworks.Count)
                 frameworkIndex = 0;
 
-            else if (frameworkIndex <= 0)
+            else if (frameworkIndex < 0)
                 frameworkIndex = frameworks.Count - 1;
 
             Frameworks framework = frameworks[frameworkIndex];
 
             // actualizar la ui
 
+            string filtroPorDefecto = "---";
+
             tbNombreFramework.Text = framework.Nombre;
             tbDescFramework.Text = framework.Descripcion;
             lvVentajas.ItemsSource = framework.Ventajas;
             lvDesventajas.ItemsSource = framework.Desventajas;
             tbPlataforma.Text = framework.Plataforma;
-            tbSistemaOperativo.Text = framework.SistemaOperativo;
-            tbLenguaje.Text = String.Join(", ", framework.Lenguajes);
-            tbTipado1.Text = framework.Tipado1;
-            tbTipado2.Text = String.Join(", ", framework.Tipaado2);
-            tbLadoDesarrollo.Text = framework.LadoDesarrollo;
-            tbIde.Text = String.Join(", ", framework.Ides);
+            tbSistemaOperativo.Text = (framework.SistemaOperativo == "Todos")? filtroPorDefecto : framework.SistemaOperativo;
+            tbLenguaje.Text = String.Join(", ", NormalizarListaSinTodos(framework.Lenguajes));
+            tbTipado1.Text = (framework.Tipado1 == "Todos")? filtroPorDefecto : framework.Tipado1;
+            tbTipado2.Text = String.Join(", ", NormalizarListaSinTodos(framework.Tipaado2));
+            tbLadoDesarrollo.Text = (framework.LadoDesarrollo == "Todos")? filtroPorDefecto : framework.LadoDesarrollo;
+            tbIde.Text = String.Join(", ", NormalizarListaSinTodos(framework.Ides));
 
             tbContador.Text = $"{frameworkIndex + 1}/{frameworks.Count}";
+
+            iFramework.Source = ObtenerImagen($"Imagenes/{framework.Id}.png");
         }
 
         private void CambiarVisibilidadDetallesFramework()
@@ -184,7 +176,7 @@ namespace SistemaExperto.Gui.Ventanas
 
             // normalizar filtros (para que puedan usarse en prolog)
 
-            /*plataforma = NormalizarFiltro(plataforma);
+            plataforma = NormalizarFiltro(plataforma);
             sistemaOperativo = NormalizarFiltro(sistemaOperativo);
             lenguaje = NormalizarFiltro(lenguaje);
             tipado1 = NormalizarFiltro(tipado1);
@@ -194,7 +186,7 @@ namespace SistemaExperto.Gui.Ventanas
             ide = NormalizarFiltro(ide);
             ram = NormalizarFiltro(ram);
             espacio = NormalizarFiltro(espacio);
-            cpu = NormalizarFiltro(cpu);*/
+            cpu = NormalizarFiltro(cpu);
 
             // construir consulta para obtener los nombres de los frameworks
 
@@ -227,11 +219,13 @@ namespace SistemaExperto.Gui.Ventanas
 
             // procesar consultas para obtener los detalles de los frameworks
 
+            nombresFrameworks.Sort();
             nombresFrameworks.ForEach(nombre =>
             {
                 frameworks.Add(new Frameworks()
                 {
-                    Nombre = DenormalizarFiltro(nombre),
+                    Id = nombre,
+                    Nombre = QueryProcessor.ProcessForString($"nombre({nombre}, X)"),
                     Descripcion = QueryProcessor.ProcessForString($"descripcion({nombre}, X)"),
                     Ventajas = QueryProcessor.ProcessForList($"ventajas({nombre}, X)"),
                     Desventajas = QueryProcessor.ProcessForList($"desventajas({nombre}, X)"),
@@ -251,29 +245,36 @@ namespace SistemaExperto.Gui.Ventanas
             CambiarFramework(0);
         }
 
-        private string NormalizarFiltro(string filtro)
+        private BitmapImage ObtenerImagen(string rutaImagen)
         {
-            return filtro.ToLower().Replace(' ', '_');
+            return new BitmapImage(new Uri($"pack://application:,,,/{rutaImagen}"));
         }
 
-        private string DenormalizarFiltro(string filtro)
+        private string NormalizarFiltro(string filtro)
         {
-            string[] words = filtro.Split('_');
+            return new StringBuilder().Append("'").Append(filtro).Append("'").ToString();
+        }
 
-            for (int i = 0; i < words.Length; i++)
-            {
-                string currentWord = words[i];
+        private List<string> NormalizarLista(List<string> lista)
+        {
+            lista.Remove("Todos");
+            lista.Sort();
 
-                // hola -> Hola
-                currentWord = new StringBuilder()
-                    .Append(currentWord[0].ToString().ToUpper())
-                    .Append(currentWord.Substring(1))
-                    .ToString();
+            var listaNormalizada = new List<string>() { "Todos" };
+            listaNormalizada.AddRange(lista);
 
-                words[i] = currentWord;
-            }
+            return listaNormalizada;
+        }
 
-            return String.Join(" ", words);
+        private List<string> NormalizarListaSinTodos(List<string> lista)
+        {
+            lista.Remove("Todos");
+            lista.Sort();
+
+            var listaNormalizada = new List<string>();
+            listaNormalizada.AddRange(lista);
+
+            return listaNormalizada;
         }
     }
 }

@@ -61,5 +61,10 @@ namespace SistemaExperto.Prolog
 
             return list[0];
         }
+
+        public static List<string> ProcessForUniqueList(string query)
+        {
+            return ProcessForList(query).Distinct().ToList();
+        }
     }
 }

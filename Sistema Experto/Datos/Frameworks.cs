@@ -8,6 +8,7 @@ namespace SistemaExperto.Datos
 {
     public class Frameworks
     {
+        public string Id { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public List<string> Ventajas { get; set; }
@@ -24,6 +25,7 @@ namespace SistemaExperto.Datos
         public override string ToString()
         {
             return "Framework{\n" +
+                $"  Id: {Id}\n" +
                 $"  Nombre: {Nombre}\n" +
                 $"  Descripcion: {Descripcion}\n" +
                 $"  Ventajas: {String.Join(", ", Ventajas)}\n" +
