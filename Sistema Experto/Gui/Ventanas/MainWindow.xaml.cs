@@ -29,6 +29,8 @@ namespace SistemaExperto.Gui.Ventanas
             CambiarEstadoRequisitosHardware();
             LlenarDatos();
             SetEvents();
+
+            bDetallesFramework.Visibility = Visibility.Hidden;
         }
 
         private void IniciarProlog()
@@ -65,11 +67,6 @@ namespace SistemaExperto.Gui.Ventanas
 
             cbIdes.ItemsSource = NormalizarLista(QueryProcessor.ProcessForUniqueList("ide(_, X)"));
             cbIdes.SelectedIndex = 0;
-
-            var cpus = new List<string>() { "Todos" };
-            EnumList.Procesadores.ForEach(i => cpus.Add(i.ToString()));
-            cbCpu.ItemsSource = cpus;
-            cbCpu.SelectedIndex = 0;
         }
 
         private void SetEvents()
@@ -84,12 +81,12 @@ namespace SistemaExperto.Gui.Ventanas
                     cbSistemasOperativos.IsEnabled = true;
                     cbLadosDesarrollo.IsEnabled = true;
                 }
-                else if (selected == Plataforma.Escritorio.ToString() || selected == Plataforma.Movil.ToString())
+                else if (selected == "Escritorio" || selected == "Movil")
                 {
                     cbSistemasOperativos.IsEnabled = true;
                     cbLadosDesarrollo.IsEnabled = false;
                 }
-                else if (selected == Plataforma.Web.ToString())
+                else if (selected == "Web")
                 {
                     cbSistemasOperativos.IsEnabled = false;
                     cbLadosDesarrollo.IsEnabled = true;
@@ -216,6 +213,16 @@ namespace SistemaExperto.Gui.Ventanas
                     nombresFrameworks.Add(i.Value);
                 }
             });
+
+            // si no hubo resultado, no mostrar informacion
+
+            if (nombresFrameworks.Count == 0)
+            {
+                bDetallesFramework.Visibility = Visibility.Hidden;
+                return;
+            }
+
+            bDetallesFramework.Visibility = Visibility.Visible;
 
             // procesar consultas para obtener los detalles de los frameworks
 

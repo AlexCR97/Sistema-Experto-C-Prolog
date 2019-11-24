@@ -64,21 +64,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Datos\EntornoDesarrolloIntegrado.cs" />
-    <Compile Include="Datos\EnumList.cs" />
-    <Compile Include="Datos\Framework.cs" />
     <Compile Include="Datos\Frameworks.cs" />
-    <Compile Include="Datos\LadoDesarrollo.cs" />
-    <Compile Include="Datos\LenguajeProgramacion.cs" />
-    <Compile Include="Datos\NombreLenguajeProgramacion.cs" />
-    <Compile Include="Datos\Paradigma.cs" />
-    <Compile Include="Datos\Plataforma.cs" />
-    <Compile Include="Datos\Procesador.cs" />
-    <Compile Include="Datos\RequisitosHardware.cs" />
-    <Compile Include="Datos\SistemaOperativo.cs" />
-    <Compile Include="Datos\StringEnum.cs" />
-    <Compile Include="Datos\Tipado1.cs" />
-    <Compile Include="Datos\Tipado2.cs" />
     <Compile Include="Gui\Ventanas\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
